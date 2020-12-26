@@ -6,6 +6,6 @@
   <title>Document</title>
 </head>
 <body>
-  <?php echo "Hello !"; ?>
+  <?php echo "p ピッコロさん <br> h 初めて食べた <br> p パンプキン！"; ?>
 </body>
 </html>

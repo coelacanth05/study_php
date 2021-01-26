@@ -1,10 +1,12 @@
 <?php
 // file取得
 $file = $_FILES['img'];
-$filename = $file['name'];
+$filename = basename($file['name']);
 $tmp_path = $file['tmp_name'];
 $file_err = $file['error'];
 $filesize = $file['size'];
+$uplaod_dir = '/shinkairoom.com/public_html/study-php/happiness_php/upload/imeges';
+$save_filename = date('YmdHis') . $filename;
 // キャプション取得
 $caption = filter_input(INPUT_POST, 'caption', FILTER_SANITIZE_SPECIAL_CHARS);
 // キャプションのバリデーション
@@ -33,9 +35,13 @@ if (!in_array(strtolower($file_ext), $arrow_ext)) {
 }
 // ファイルはあるかどうか？
 if (is_uploaded_file($tmp_path)) {
-  echo $filename . 'をアップしました。';
+  if (move_uploaded_file($tmp_path, $uplaod_dir . $save_filename)) {
+    echo $filename . 'を' . $uplaod_dir . 'アップしました。';
+  } else {
+    echo 'ファイルが保存できませんでした';
+  }
 } else {
-  echo 'fファイルが選択されていません';
+  echo 'ファイルが選択されてません。';
   echo '<br>';
 }
 ?>
